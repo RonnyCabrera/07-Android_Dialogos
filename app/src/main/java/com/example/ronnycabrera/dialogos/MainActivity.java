@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void mostrar(View v) {
-        dialogoMultiChoose();
+        dialogoPersonalizado();
     }
 
     public void dialogoAlerta() {
@@ -156,5 +157,34 @@ public class MainActivity extends AppCompatActivity {
         alertaDialogo.setCancelable(true);
         alertaDialogo.create();
         alertaDialogo.show();
+    }
+
+    public void dialogoPersonalizado() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.dialogo_personalizado, null));
+
+        builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                Toast.makeText(getApplicationContext(), "SI", Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                Toast.makeText(getApplicationContext(), "NO", Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNeutralButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                Toast.makeText(getApplicationContext(), "Cancelar", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
     }
 }
